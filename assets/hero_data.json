@@ -1,0 +1,169 @@
+{
+  "heroes": [
+    {
+      "name": "Kitsune",
+      "currentHealth": 90,
+      "maxhealth": 90,
+      "damage": 20,
+      "metaTag": "Disruptor",
+      "abilityName": "Charm",
+      "energyCost": 4,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Dwarf",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 15,
+      "metaTag": "Momentum",
+      "abilityName": "Rage",
+      "energyCost": 3,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Ancestor",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 25,
+      "metaTag": "Specialist",
+      "abilityName": "Soulbond",
+      "energyCost": 1,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Angel",
+      "currentHealth": 90,
+      "maxHealth": 90,
+      "damage": 20,
+      "metaTag": "Support",
+      "abilityName": "Desperate Prayer",
+      "energyCost": 3,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Sorcerer",
+      "currentHealth": 90,
+      "maxHealth": 90,
+      "damage": 25,
+      "metaTag": "Cleave",
+      "abilityName": "Flame Nova",
+      "energyCost": 5,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Trapper",
+      "currentHealth": 90,
+      "maxHealth": 90,
+      "damage": 25,
+      "metaTag": "Cleave",
+      "abilityName": "Caltrops",
+      "energyCost": 2,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Venomancer",
+      "currentHealth": 90,
+      "maxHealth": 90,
+      "damage": 25,
+      "metaTag": "Cleave",
+      "abilityName": "Anthrax",
+      "energyCost": 3,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Witch",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 20,
+      "metaTag": "Disruptor",
+      "abilityName": "Curse",
+      "energyCost": 3,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Visebot",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 20,
+      "metaTag": "Disruptor",
+      "abilityName": "Rocket Grab",
+      "energyCost": 5,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Samurai",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 15,
+      "metaTag": "Momentum",
+      "abilityName": "Double Slash",
+      "energyCost": 3,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Vampire",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 15,
+      "metaTag": "Momentum",
+      "abilityName": "Blood is Power",
+      "energyCost": 1,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Captain",
+      "currentHealth": 90,
+      "maxHealth": 90,
+      "damage": 20,
+      "metaTag": "Support",
+      "abilityName": "Battlecry",
+      "energyCost": 3,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Ritualist",
+      "currentHealth": 90,
+      "maxHealth": 90,
+      "damage": 20,
+      "metaTag": "Support",
+      "abilityName": "Revive",
+      "energyCost": 6,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Ogre",
+      "currentHealth": 150,
+      "maxHealth": 150,
+      "damage": 30,
+      "metaTag": "Specialist",
+      "abilityName": "N/A",
+      "energyCost": 0,
+      "activeEffects": [],
+      "isAlive": true
+    },
+    {
+      "name": "Assassin",
+      "currentHealth": 100,
+      "maxHealth": 100,
+      "damage": 25,
+      "metaTag": "Specialist",
+      "abilityName": "Snipe",
+      "energyCost": 2,
+      "activeEffects": [],
+      "isAlive": true
+    }
+  ]
+}
