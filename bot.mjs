@@ -5,7 +5,7 @@ import fs from 'fs';
 import { combineImagesForCombat, combineImagesForDraft, shuffleArray, delay } from './helper.mjs';
 
 dotenv.config();
-const TOKEN = process.env.DISCORD_TOKEN;
+const TOKEN = process.env.DISCORD_TOKEN;o
 let gameInProgress, challengerStarterChosen, opponentStarterChosen;
 let skipDraft = true;
 let changeInProgress = false;
