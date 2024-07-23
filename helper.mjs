@@ -1,16 +1,18 @@
 import Jimp from 'jimp';
 import fs from 'fs';
 import { saveGameDataFields } from './saveData.mjs';
+import { AttachmentBuilder } from 'discord.js';
 
 export function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms)); 
   }
 
-export async function combineImagesForCombat(imagePath1, imagePath2, outputImagePath) {
+export async function combineImagesForCombat(imagePath1, imagePath2, imagePath3, outputImagePath) {
     try {
-        const [image1, image2, backgroundImage] = await Promise.all([
+        const [image1, image2, templateImage, backgroundImage] = await Promise.all([
             Jimp.read(imagePath1),
             Jimp.read(imagePath2),
+            Jimp.read(imagePath3),
             Jimp.read('./assets/blank.png')
         ]);
 
@@ -19,6 +21,7 @@ export async function combineImagesForCombat(imagePath1, imagePath2, outputImage
 
         // Composite onto the new image
         combinedImage.composite(image2, 50, 0);
+        combinedImage.composite(templateImage, 0, 0);
         combinedImage.composite(image1, 1871, 0);
 
         // Save the new image
@@ -29,6 +32,36 @@ export async function combineImagesForCombat(imagePath1, imagePath2, outputImage
         console.error('Error combining images:', error);
     }
 }
+
+// Combine function for testing to add card templates to the images, used with !combine command
+export async function combineImagesForCombatTest(imagePath1, imagePath2, imagePath3, outputImagePath, channel) {
+  try {
+    const [image1, image2, templateImage, backgroundImage] = await Promise.all([
+        Jimp.read(imagePath1),
+        Jimp.read(imagePath2),
+        Jimp.read(imagePath3),
+        Jimp.read('./assets/blank.png')
+    ]);
+
+    // Create a NEW image based on the background
+    const combinedImage = backgroundImage.clone(); 
+
+    // Composite onto the new image
+    combinedImage.composite(image2, 50, 0);
+    combinedImage.composite(templateImage, 0, 0);
+    combinedImage.composite(image1, 1871, 0);
+
+    // Save the new image
+    await combinedImage.writeAsync(outputImagePath); 
+
+    // send the image in discord message
+    await channel.send({
+      files: [new AttachmentBuilder(outputImagePath)]
+  });
+    console.log('combineImagesForCombatTest.Images (for testing) combined successfully!');
+} catch (error) {
+    console.error('Error combining images:', error);
+}}
 
 export async function combineImagesForDraft(imagePath1, imagePath2, imagePath3, outputImagePath) {
     try {
