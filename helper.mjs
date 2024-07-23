@@ -46,10 +46,21 @@ export async function combineImagesForCombatTest(imagePath1, imagePath2, imagePa
     // Create a NEW image based on the background
     const combinedImage = backgroundImage.clone(); 
 
+    console.log("Template Image Dimensions:", "X:", templateImage.bitmap.width, " Y:", templateImage.bitmap.height);
+
+    // Load font for text
+    const font = await Jimp.loadFont('./assets/fonts/templateFont/PixelFont.fnt');
+    console.log('Font loaded successfully!');
+    const maxTextWidth = 1250; // Text will wrap to a new line if it exceeds this width
+    const positionX = 110;
+    const positionY = 1500;
+    templateImage.print(font, positionX, positionY, 'Omg wow herodraft best game ever in the entire universe! I am the best at this game!', maxTextWidth);
+
     // Composite onto the new image
     combinedImage.composite(image2, 50, 0);
-    combinedImage.composite(templateImage, 0, 0);
+    combinedImage.composite(templateImage, 50, -80);
     combinedImage.composite(image1, 1871, 0);
+    combinedImage.composite(templateImage, 1875, -80);
 
     // Save the new image
     await combinedImage.writeAsync(outputImagePath); 
