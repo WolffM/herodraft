@@ -49,10 +49,10 @@ export async function combineImagesForCombatTest(imagePath1, imagePath2, imagePa
     console.log("Template Image Dimensions:", "X:", templateImage.bitmap.width, " Y:", templateImage.bitmap.height);
 
     // Load font for text
-    const font = await Jimp.loadFont('./assets/fonts/templateFont/PixelFont.fnt');
+    const font = await Jimp.loadFont('./assets/fonts/templateFont/PlanewalkerFont.fnt');
     console.log('Font loaded successfully!');
     const maxTextWidth = 1250; // Text will wrap to a new line if it exceeds this width
-    const positionX = 110;
+    const positionX = 100;
     const positionY = 1500;
     templateImage.print(font, positionX, positionY, 'Omg wow herodraft best game ever in the entire universe! I am the best at this game!', maxTextWidth);
 
