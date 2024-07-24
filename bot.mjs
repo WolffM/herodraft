@@ -16,7 +16,7 @@ let challengerTeamName, opponentTeamName, currentPlayerId, otherPlayerId, otherP
 // hardcoded image paths for testing
 const challengerTestImage1 = './assets/AncestorCombat.png'
 const challengerTestImage2 = './assets/KitsuneCombat.png'
-const templateTestImage = './assets/cardTemplates/clearTextBox.png'
+const textboxTemplateImage = './assets/cardTemplates/clearTextBox.png'
 const outputTestImagePath = './genassets/images/combat/Ancestor_vs_KitsuneCombat.png'
 
 const client = new Client({
@@ -48,7 +48,7 @@ client.on('messageCreate', async (message) => {
         await calculateRollResult(message.content.slice(5), message); // slice to remove '!roll'
     } else if (message.content.startsWith('!combine')) { // For testing
         const channel = message.channel;
-        await combineImagesForCombatTest(challengerTestImage1, challengerTestImage2, templateTestImage, outputTestImagePath, channel)
+        await combineImagesForCombatTest(challengerTestImage1, challengerTestImage2, textboxTemplateImage, outputTestImagePath, channel)
     }
 });
 
@@ -593,7 +593,7 @@ async function heroGame(channel, gameFilename) {
         const opponentEnergyBar = " [" + "⚡️".repeat(opponentEnergy) + "-".repeat(energyBarLength - opponentEnergy) + "] ";
 
         if (!fs.existsSync(outputCombatImagePath)) {
-            await combineImagesForCombat(opponentCombatImagePath, challengerCombatImagePath, outputCombatImagePath)
+            await combineImagesForCombat(opponentCombatImagePath, challengerCombatImagePath, textboxTemplateImage, outputCombatImagePath)
         }
 
         const outputImage = fs.readFileSync(outputCombatImagePath);
