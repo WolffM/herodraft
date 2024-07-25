@@ -1,34 +1,87 @@
 import Jimp from 'jimp';
 import fs from 'fs';
 import { saveGameDataFields } from './saveData.mjs';
+import { AttachmentBuilder } from 'discord.js';
+
+const maxTextWidth = 1250; // Text will wrap to a new line if it exceeds this width
+const textPositionX = 110;
+const textPositionY = 1500;
 
 export function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms)); 
   }
 
-export async function combineImagesForCombat(imagePath1, imagePath2, outputImagePath) {
+export async function combineImagesForCombat(imagePath1, imagePath2, imagePath3, outputImagePath) {
     try {
-        const [image1, image2, backgroundImage] = await Promise.all([
+        const [image1, image2, templateImage, backgroundImage] = await Promise.all([
             Jimp.read(imagePath1),
             Jimp.read(imagePath2),
+            Jimp.read(imagePath3),
             Jimp.read('./assets/blank.png')
         ]);
 
         // Create a NEW image based on the background
-        const combinedImage = backgroundImage.clone(); 
+        const combinedImage = backgroundImage.clone();
+        
+        console.log("Template Image Dimensions:", "X:", templateImage.bitmap.width, " Y:", templateImage.bitmap.height);
+
+        // Load font for text
+        const font = await Jimp.loadFont('./assets/fonts/templateFont/PlanewalkerFont.fnt');
+        console.log('Font loaded successfully!');
+        templateImage.print(font, textPositionX, textPositionY, 'Insert text here', maxTextWidth);
 
         // Composite onto the new image
         combinedImage.composite(image2, 50, 0);
+        combinedImage.composite(templateImage, 50, -80)
         combinedImage.composite(image1, 1871, 0);
+        combinedImage.composite(templateImage, 1875, -80);
 
         // Save the new image
-        await combinedImage.writeAsync(outputImagePath); 
+        await combinedImage.writeAsync(outputImagePath);
 
         console.log('combineImagesForCombat.Images combined successfully!');
     } catch (error) {
         console.error('Error combining images:', error);
     }
 }
+
+// Combine function for testing to add card templates to the images, used with !combine command
+export async function combineImagesForCombatTest(imagePath1, imagePath2, imagePath3, outputImagePath, channel) {
+  try {
+    const [image1, image2, templateImage, backgroundImage] = await Promise.all([
+        Jimp.read(imagePath1),
+        Jimp.read(imagePath2),
+        Jimp.read(imagePath3),
+        Jimp.read('./assets/blank.png')
+    ]);
+
+    // Create a NEW image based on the background
+    const combinedImage = backgroundImage.clone(); 
+
+    console.log("Template Image Dimensions:", "X:", templateImage.bitmap.width, " Y:", templateImage.bitmap.height);
+
+    // Load font for text
+    const font = await Jimp.loadFont('./assets/fonts/templateFont/PlanewalkerFont.fnt');
+    console.log('Font loaded successfully!');
+    templateImage.print(font, textPositionX, textPositionY, 'Insert text here', maxTextWidth);
+
+    // Composite onto the new image
+    combinedImage.composite(image2, 50, 0);
+    combinedImage.composite(templateImage, 50, -80);
+    combinedImage.composite(image1, 1871, 0);
+    combinedImage.composite(templateImage, 1875, -80);
+
+    // Save the new image
+    await combinedImage.writeAsync(outputImagePath); 
+
+    // send the image in discord message
+    await channel.send({
+      files: [new AttachmentBuilder(outputImagePath)]
+  });
+    console.log('combineImagesForCombatTest.Images (for testing) combined successfully!');
+} catch (error) {
+    console.error('Error combining images:', error);
+}}
 
 export async function combineImagesForDraft(imagePath1, imagePath2, imagePath3, outputImagePath) {
     try {

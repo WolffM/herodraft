@@ -2,7 +2,7 @@ import { saveGameData, saveGameDataFields, loadGameData } from './saveData.mjs';
 import { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import { combineImagesForCombat, combineImagesForDraft, shuffleArray, delay } from './helper.mjs';
+import { combineImagesForCombat, combineImagesForDraft, combineImagesForCombatTest, shuffleArray, delay } from './helper.mjs';
 
 dotenv.config();
 const TOKEN = process.env.DISCORD_TOKEN;
@@ -12,6 +12,12 @@ let changeInProgress = false;
 let interactionsReceived = 0;
 let draftRound = 1;
 let challengerTeamName, opponentTeamName, currentPlayerId, otherPlayerId, otherPlayerName, currentPlayerName, challengerId, challengerName, opponentId, opponentName = '';
+
+// hardcoded image paths for testing
+const challengerTestImage1 = './assets/AncestorCombat.png'
+const challengerTestImage2 = './assets/KitsuneCombat.png'
+const textboxTemplateImage = './assets/cardTemplates/clearTextBox.png'
+const outputTestImagePath = './genassets/images/combat/Ancestor_vs_KitsuneCombat.png'
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
@@ -40,6 +46,9 @@ client.on('messageCreate', async (message) => {
         await startHerodraft(message, 0);
     } else if (message.content.startsWith('!roll')) {
         await calculateRollResult(message.content.slice(5), message); // slice to remove '!roll'
+    } else if (message.content.startsWith('!combine')) { // For testing
+        const channel = message.channel;
+        await combineImagesForCombatTest(challengerTestImage1, challengerTestImage2, textboxTemplateImage, outputTestImagePath, channel)
     }
 });
 
@@ -584,7 +593,7 @@ async function heroGame(channel, gameFilename) {
         const opponentEnergyBar = " [" + "⚡️".repeat(opponentEnergy) + "-".repeat(energyBarLength - opponentEnergy) + "] ";
 
         if (!fs.existsSync(outputCombatImagePath)) {
-            await combineImagesForCombat(opponentCombatImagePath, challengerCombatImagePath, outputCombatImagePath)
+            await combineImagesForCombat(opponentCombatImagePath, challengerCombatImagePath, textboxTemplateImage, outputCombatImagePath)
         }
 
         const outputImage = fs.readFileSync(outputCombatImagePath);
