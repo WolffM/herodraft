@@ -33,6 +33,12 @@ There is no build step and no package split: `bot.mjs` imports directly from
 `helper.mjs` and `saveData.mjs`, and game state lives entirely as JSON files
 on disk next to the process, read and rewritten on every turn.
 
+### Dice roller internals
+
+`calculateRollResult` in `bot.mjs` is where the critical-success and
+critical-failure checks in [features.md](features.md#dice-roller) are
+implemented.
+
 ## Tests and gates
 
 There are none: no test file, no linter configuration, and no CI workflow
